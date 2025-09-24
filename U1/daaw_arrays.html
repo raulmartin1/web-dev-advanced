@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>DAAW - Methods to be used on Arrays</title>
+</head>
+<body>
+ <h1>Métodos de Arrays</h1>
+ <script>
+  // Paso 1: Añadir arrays para las tareas siguientes
+  console.log("Paso 1: Añadir arrays");
+  const toppings = ['Mushrooms ', 'Tomatoes', 'Eggs', 'Lettuce'];
+
+  const meats = {
+    beyond: 10,
+    beef: 5,
+    pork: 7
+  };
+
+  const prices = {
+    hotDog: 453,
+    burger: 765,
+    sausage: 634,
+    corn: 234,
+  };
+
+  const feedback = [
+    { comment: 'Love the burgs', rating: 4 },
+    { comment: 'Horrible Service', rating: 2 },
+    { comment: 'Smoothies are great, liked the burger too', rating: 5 },
+    { comment: 'Ambiance needs work', rating: 3 },
+    { comment: 'I DONT LIKE BURGERS', rating: 1 },
+  ];
+
+  const people = [
+    {
+      birthday: 'April 22, 1993',
+      names: {
+        first: 'Keith',
+        last: 'Buckley'
+      }
+    },
+    {
+      birthday: 'January 3, 1975',
+      names: {
+        first: 'Larry',
+        last: 'Heep'
+      }
+    },
+    {
+      birthday: 'February 12, 1944',
+      names: {
+        first: 'Linda',
+        last: 'Bermeer'
+      }
+    }
+  ];
+
+  const orderTotals = [10, 25, 5, 20];
+
+  const inventory = [
+    { type: 'shirt', price: 4000 },
+    { type: 'pants', price: 4532 },
+    { type: 'socks', price: 234 },
+    { type: 'shirt', price: 2343 },
+    { type: 'pants', price: 2343 },
+    { type: 'socks', price: 542 },
+    { type: 'pants', price: 123 },
+  ];
+  console.log("Arrays definidos:", { toppings, meats, prices, feedback, people, orderTotals, inventory });
+ 
+ 
+ 
+ 
+    // Paso 2
+    console.log("Paso 2: Metodos estaticso de Array");
+    console.log(Object.entries(meats));
+    console.log(Object.keys(meats));
+    console.log(Object.values(meats));
+
+    Object.values(meats).forEach(element => {
+    console.log(element);
+    });
+
+    Object.entries(meats).forEach(element => {
+    const [key, value]  = element;
+    console.log(key, value);
+    });
+ 
+    //Paso 3
+    console.log("Paso 3: Uso de .join()");
+    console.log(toppings.join(' or '));
+
+    //Paso 4
+    console.log("Paso 4: Uso de .split()");
+    const foodString = "hot dogs, hamburgers, sausages, corn";
+    console.log(foodString.split(','));
+
+    // Paso 5: MÉTODOS DE INSTANCIA: Usar métodos MUTABLES .pop(), .push(), .shift(), .unshift()
+    console.log("\nPaso 5: MÉTODOS DE INSTANCIA: Usar métodos MUTABLES .pop(), .push(), .shift(), .unshift()");
+    // tomar el último elemento de toppings con pop()
+    console.log(toppings);
+    const lastItem = toppings.pop();
+    console.log(toppings);
+    // añadirlo de nuevo con push()
+    toppings.push(lastItem);
+    console.log(toppings);
+    // tomar el primer elemento de toppings con shift()
+    const firstItem = toppings.shift();
+    console.log(toppings);
+    // añadirlo de nuevo con unshift()
+    toppings.unshift(firstItem);
+    console.log(toppings);
+
+    // Paso 6: MÉTODOS DE INSTANCIA: Hacer los últimos cuatro, pero INMUTABLES: con SPREADs y nuevas variables
+    console.log("\nPaso 6: MÉTODOS DE INSTANCIA: Hacer los últimos cuatro, pero INMUTABLES: con SPREADs y nuevas variables");
+    let newToppings = toppings.slice(0, toppings.length - 1);
+    console.log(newToppings);
+    newToppings = [...newToppings, toppings[toppings.length - 1]];
+    console.log(newToppings);
+    newToppings = toppings.slice(1, toppings.length);
+    console.log(newToppings);
+    newToppings = [toppings[0], ...newToppings];
+    console.log(newToppings);
+
+    // Paso 7: MÉTODOS DE INSTANCIA: Uso de .indexOf() y .includes()
+    console.log("\nPaso 7: MÉTODOS DE INSTANCIA: Uso de .indexOf() y .includes()");
+    // encontrar el índice de Tomatoes con indexOf() / lastIndexOf()
+    const avoIndex = toppings.indexOf('Tomatoes');
+    console.log(avoIndex);
+    // verificar si Tomatoes está en toppings con includes()
+    const isInToppings = toppings.includes('Tomatoes');
+    console.log(`toppings incluye Tomatoes: ${isInToppings}`);
+
+    // Paso 8: MÉTODOS DE CALLBACK: Usar find() para encontrar un solo elemento en un array (el primero encontrado)
+    console.log("\nPaso 8: MÉTODOS DE CALLBACK: Usar find() para encontrar un solo elemento en un array (el primero encontrado)");
+    // encontrar la primera calificación que hable de una burger con find()
+    const burgRating = feedback.find(rating => {
+        return rating.comment.includes('burger'); // devuelve true si se encuentra
+    });
+    // el primer true detiene el proceso de búsqueda y asigna el elemento que lo activó
+    console.log(burgRating);
+
+    // Paso 9: MÉTODOS DE CALLBACK: Usar filter() para encontrar múltiples elementos en un array
+    console.log("\nPaso 9: MÉTODOS DE CALLBACK: Usar filter() para encontrar múltiples elementos en un array");
+    // encontrar todas las calificaciones que sean mayores a 2 con filter()
+    const goodReviews = feedback.filter(singleFeedback => {
+        if (singleFeedback.rating >= 2) {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    console.table(goodReviews);
+    // encontrar todas las calificaciones que hablen de una burger con filter()
+    const burgReviews = feedback.filter(singleFeedback => {
+        return singleFeedback.comment.includes('burg') || singleFeedback.comment.includes('BURG');
+    });
+    console.table(burgReviews);
+
+    // Paso 10: MÉTODOS DE CALLBACK: Usar sort() para ordenar elementos en un array
+    console.log("\nPaso 10: MÉTODOS DE CALLBACK: Usar sort() para ordenar elementos en un array");
+    // ordenar toppings alfabéticamente con sort()
+    console.log(toppings.sort());
+    // ordenar el objeto prices de más caro a menos caro con .sort()
+    const productsSortedByPrice = Object.entries(prices).sort((a, b) => {
+        const aPrice = a[1];
+        const bPrice = b[1];
+        return bPrice - aPrice;
+    });
+    console.table(productsSortedByPrice);
+
+    // Paso 11: MÉTODOS DE INSTANCIA: Usar Object.fromEntries() para convertir un ARRAY en un OBJECT
+    console.log("\nPaso 11: MÉTODOS DE INSTANCIA: Usar Object.fromEntries() para convertir un ARRAY en un OBJECT");
+    console.table(Object.fromEntries(productsSortedByPrice));
+
+    // Paso 12: MÉTODO DE BUCLE: Usar forEach() para realizar una operación con cada elemento de un ARRAY
+    console.log("\nPaso 12: MÉTODO DE BUCLE: Usar forEach() para realizar una operación con cada elemento de un ARRAY");
+    toppings.forEach(topping => {
+        console.log(topping);
+    });
+
+    // Paso 13: MÉTODO DE INSTANCIA: Uso de map() con arrays
+    console.log("\nPaso 13: MÉTODO DE INSTANCIA: Uso de map() con arrays");
+    // MAP -> funciona como una línea de fábrica: entrada, procesar entrada, salida
+    const test = toppings.map(word => {
+        return `a ${word} b`;
+    });
+    console.log(test);
+    // MAPs encadenados
+    function capitalizeFirst(word) {
+        return `${word[0].toUpperCase()}${word.slice(1)}`;
+    }
+    const fullNames = ['alice', 'carol'].map(capitalizeFirst).map(name => `${name} Boss`);
+    console.log(fullNames);
+    // MAP es útil para formatear datos según sea necesario
+    const cleanPeople = people.map(person => {
+        console.log(person);
+        const birthday = new Date(person.birthday);
+        const now = Date.now(); // tiempo actual en milisegundos
+        const age = Math.floor((now - birthday) / (1000 * 60 * 60 * 24 * 365));
+        return {
+        age: age,
+        name: `${person.names.first} ${person.names.last}`
+        };
+    });
+    console.table(cleanPeople); // Array de objetos
+
+    // Paso 14: MÉTODO DE INSTANCIA: Uso de reduce() con arrays
+    console.log("\nPaso 14: MÉTODO DE INSTANCIA: Uso de reduce() con arrays");
+    // REDUCE: array como entrada, agregar datos, salida
+    function tallyNumbers(total, value) { // 1er parámetro es el acumulador, 2do parámetro es el valor actual a sumar al acumulador
+        console.log(`El total actual es ${total}`);
+        console.log(`El valor a añadir es ${value}`);
+        return total + value;
+    }
+    const allOrders = orderTotals.reduce(tallyNumbers, 0); // valor inicial de 0
+    console.log(allOrders);
+
+    // Paso 15: MÉTODO DE INSTANCIA: reduce() puede usarse para generar un OBJECT final que agregue datos
+    console.log("\nPaso 15: MÉTODO DE INSTANCIA: reduce() puede usarse para generar un OBJECT final que agregue datos");
+    function inventoryReducer(totals, item) { // acumulador -> objeto "totals"
+        console.log(`Iterando sobre ${item.type}`);
+        // incrementar el tipo en 1
+        totals[item.type]
+        ? totals[item.type] = totals[item.type] + 1
+        : totals[item.type] = 1;
+        return totals;
+    }
+    const inventoryCounts = inventory.reduce(inventoryReducer, {}); // Valor inicial -> objeto vacío
+    console.table(inventoryCounts);
+        
+    </script>
+</body>
+</html>
