@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>DAAW - Usual looping in JavaScript</title>
+</head>
+<body>
+ <h1>Bucles habituales en JavaScript</h1>
+ <script>
+  // Paso 1: Uso de declaraciones FOR
+  console.log("Paso 1: Uso de declaraciones FOR");
+  const numbers = [1, 2, 3];
+  const name = 'Joy';
+  const joy = {
+    name: 'Joy',
+    age: 25,
+    cool: true
+  };
+  // Regular FOR LOOP
+  for (let i = 0; i < numbers.length; i++) {
+    console.log(numbers[i]);
+  }
+  // For of -> LOOP OVER ITERATORS
+  for (const letter of name) {
+    console.log(letter);
+  }
+  for (const number of numbers) {
+    console.log(number)
+  }
+  for (const value of Object.values(joy)) {
+    console.log(value);
+  }
+  for (const key of Object.keys(joy)) {
+    console.log(key);
+  }
+  for (const [key, value] of Object.entries(joy)) {
+    console.log(key, value);
+  }
+  for (const entry of Object.entries(joy)) {
+    console.log(entry);
+  }
+
+  // Paso 2: Uso de declaraciones WHILE
+  console.log("\nPaso 2: Uso de declaraciones WHILE");
+  // While Loop
+  let cool = true;
+  let i = 1;
+  while (cool === true) { // condition is check out first
+    console.log('You are cool');
+    i++;
+    if (i > 100) {
+      cool = false;
+    }
+  }
+  // Do While Loop
+  cool = true;
+  i = 1;
+  do {
+    console.log('Not so cool');
+    i++
+    if (i > 100) {
+      cool = false;
+    }
+  } while(cool); // condition is check out last
+ </script>
+</body>
+</html>
