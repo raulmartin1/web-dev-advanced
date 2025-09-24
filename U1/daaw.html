@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1.0">
+ <title>DAAW</title>
+</head>
+<body>
+    <h1> U1 </h1>
+    <script>
+        console.log("Paso 3: Crear array y acceder a elementos")
+        const names = ['alice', 'bob', 'carol'];
+        console.log(names[0]); // alice
+        console.log(names.length); // 3
+        console.log(names[names.length - 1]); // carol
+    
+        console.log("Paso 4: Metodos mutables e inmutables");
+        const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        numbers.reverse(); // mutable method -> it modifies the original array
+        console.log(numbers); // [9, 8, 7, 6, 5, 4, 3, 2, 1]
+        const pizzaSlices = numbers.slice(2, 4); // immutable method -> array isn't modified
+        console.log(pizzaSlices); // [7, 6]
+        console.log(numbers); // [9, 8, 7, 6, 5, 4, 3, 2, 1]
+   
+        console.log("Paso 5: Copia superficial");
+        const numbersCopia = [...numbers].reverse(); // use of SPRE
+        console.log(numbersCopia); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        console.log(numbers); // [9, 8, 7, 6, 5, 4, 3, 2, 1]    
+
+        console.log("Paso 6: Añadir elementos");
+        names.push('denver'); // modify array -> add element at back
+        console.log(names); // ['alice', 'bob', 'carol', 'denver']
+        const names2 = [...names, 'denver']; // create new array -> add element at back
+        console.log(names2); // ['alice', 'bob', 'carol', 'denver']
+        names.unshift('vega'); // modify array -> add element at front
+        const names3 = ['vega', ...names]; // create new array -> add element at front
+        console.log(names); // ['vega', 'alice', 'bob', 'carol', 'denver']
+
+        console.log("Paso 7: Añadir/Eliminar elementos");
+        const bikes = ['bianchi', 'miele' , 'panasonic', 'miyata'];
+        const newBikes = [
+            ...bikes.slice(0, 2), // ['bianchi', 'miele']
+            'benotto', // new element
+            ...bikes.slice(2) // ['panasonic', 'miyata']
+        ];
+        console.log(newBikes); // ['bianchi', 'miele', 'benotto', 'panasonic', 'miyata']
+
+        const newBikes2 = [
+            ...newBikes.slice(0,3),
+            ...newBikes.slice(4)
+        ];
+        console.log(newBikes2); // ['bianchi', 'miele', 'benotto', 'miyata']
+
+        console.log("Paso 8: Crear array de objetos");
+        const comments = [
+            { text: 'Cool', id: 123 },
+            { text: 'Love this', id: 133 },
+            { text: 'Not so good', id: 233 },
+            { text: 'good bikes', id: 333 },
+            { text: 'really good', id: 433 },
+        ];
+        console.log(comments);
+
+        console.log("Paso 9: Acceder a atributos como objeto y array");
+        console.log(comments[1].id);
+        console.log(comments[1]['id']);
+        
+        console.log("Paso 10: Funcion para eliminar comentarios");
+        function deleteComment(id, comments) {
+            const commentIndex = comments.findIndex(comment => {
+                return comment.id === id
+            });
+            return [
+                ...comments.slice(0, commentIndex),
+                ...comments.slice(commentIndex + 1)
+            ];
+        };
+
+        const updatedComments = deleteComment(233, comments);
+        console.log(updatedComments);
+
+        console.log("Paso 11: findIndex() directamente");
+        const bobIndex = names.findIndex(name => name === 'bob');
+        const newNamesWithOutBob = [
+            ...names.slice(0, bobIndex),
+            ...names.slice(bobIndex + 1)
+        ];
+        console.log(newNamesWithOutBob);
+
+        
+  </script>
+</body>
+</html>
